@@ -16,6 +16,5 @@ I am sharing this repo for other students who are looking to improve their progr
 If you have any questions, please feel free to contact me at efekurucay.com.
 
 Thank you.
-
 2023.
 
