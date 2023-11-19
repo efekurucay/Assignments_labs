@@ -86,7 +86,7 @@ int x=1;
         
 
 } 
-public static void displayStatics(int n){
+public static void displayStatistics(int n){
 
     double totalData=0.0;
     double totalDataSquare=0.0;
