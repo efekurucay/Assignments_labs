@@ -251,10 +251,25 @@ public class Ex06_20220808005 {
          */
 
         // Your code goes here...
+       
+        int[] newArray = new int[array.length];
+      
+        for ( int i = 0; i< array.length; i++){
 
+            for ( int j = 0; j< array.length; j++){
+
+                if(array[i]==array[j]){}
+
+        }
+
+
+         
+
+        }
+
+       
         
-        int[] a ={2,4};
-        return a;
+        return newArray;
     }
 
     // Question 5: Sorted?
