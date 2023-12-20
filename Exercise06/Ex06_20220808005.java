@@ -20,10 +20,16 @@ public class Ex06_20220808005 {
      
      */
     public static void main(String[] args) {
-       
-            int result = random(1, 10, 3, 5, 7);
-        System.out.println("Random Number: " + result);
-        
+       int []array = {5,6,7,9,9,42,6,7,3};
+      
+        // int []arry =eliminateDuplicates(array);
+        // for(int i=0; i< arry.length;i++){
+        //     System.out.println(arry[i]);
+        // }
+
+
+
+
         
         // Question 1
         /*
@@ -239,7 +245,7 @@ public class Ex06_20220808005 {
      
     }
 
-    // Question 4: Eliminate duplicates
+    // Question 4: Eliminate duplicates *NOT DONE YET
     public static int[] eliminateDuplicates(int[] array) {
         /*
          * Write a method that returns a new array by eliminating the duplicate
@@ -256,9 +262,14 @@ public class Ex06_20220808005 {
       
         for ( int i = 0; i< array.length; i++){
 
-            for ( int j = 0; j< array.length; j++){
+            for ( int j = i+1 ; j< array.length; j++){
+                //if index i equal index j 
+                if(array[i]==array[j]){ 
 
-                if(array[i]==array[j]){}
+                    newArray[j]=array[j];
+
+
+                }
 
         }
 
@@ -272,7 +283,7 @@ public class Ex06_20220808005 {
         return newArray;
     }
 
-    // Question 5: Sorted?
+    // Question 5: Sorted? *DONE
     public static boolean isSorted(int[] array) {
         /*
          * Write a method that returns true if the array is already sorted in increasing order,
@@ -283,6 +294,15 @@ public class Ex06_20220808005 {
          */
 
         // Your code goes here...
+            // Increasing sort control
+        if(array.length==1){return true;}
+        for (int i = 0; i < array.length - 1; i++) {
+
+            // If this num is not greater than the next one, the array is not sorted.
+            if (array[i] > array[i + 1]) {
+                return false;
+            }
+        }
         return true;
     }
 
