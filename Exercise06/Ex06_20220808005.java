@@ -20,8 +20,11 @@ public class Ex06_20220808005 {
      
      */
     public static void main(String[] args) {
-        int result = random(1, 10, 3, 5, 7);
+       
+            int result = random(1, 10, 3, 5, 7);
         System.out.println("Random Number: " + result);
+        
+        
         // Question 1
         /*
         int[] students = new int[10];
@@ -201,7 +204,7 @@ public class Ex06_20220808005 {
        
     }
 
-    // Question 3: Random number chooser
+    // Question 3: Random number chooser *DONE
     public static int random(int start, int end, int... exclude) {
         /*
          * Write a method that returns a random number between start and end,
@@ -227,7 +230,7 @@ public class Ex06_20220808005 {
              for (int excludedNum : exclude) {
                  if (randomNum == excludedNum) {
                      isExcluded = true;
-                     break;
+                     
                  }
              }
          } while (isExcluded);
@@ -248,6 +251,8 @@ public class Ex06_20220808005 {
          */
 
         // Your code goes here...
+
+        
         int[] a ={2,4};
         return a;
     }
