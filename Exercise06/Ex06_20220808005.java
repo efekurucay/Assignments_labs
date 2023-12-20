@@ -20,7 +20,8 @@ public class Ex06_20220808005 {
      
      */
     public static void main(String[] args) {
-
+        int result = random(1, 10, 3, 5, 7);
+        System.out.println("Random Number: " + result);
         // Question 1
         /*
         int[] students = new int[10];
@@ -216,7 +217,23 @@ public class Ex06_20220808005 {
          */
 
          // Your code goes here...
-        return 5;
+         int randomNum;
+         boolean isExcluded;
+         do {
+             // Generate a random number 
+             randomNum = random(start, end);
+             // Control and generate again or not
+             isExcluded = false;
+             for (int excludedNum : exclude) {
+                 if (randomNum == excludedNum) {
+                     isExcluded = true;
+                     break;
+                 }
+             }
+         } while (isExcluded);
+ 
+         return randomNum;
+     
     }
 
     // Question 4: Eliminate duplicates
