@@ -20,8 +20,6 @@ public class Ex06_20220808005 {
      
      */
     public static void main(String[] args) {
-       int []array = {5,6,7,9,9,42,6,7,3};
-      
         // Question 1
         /*
         int[] students = new int[10];
@@ -236,7 +234,7 @@ public class Ex06_20220808005 {
      
     }
 
-    // Question 4: Eliminate duplicates *DONE ama chatgpt ile yaptım bakıcam daha.
+    // Question 4: Eliminate duplicates *DONE.
     public static int[] eliminateDuplicates(int[] array) {
         /*
          * Write a method that returns a new array by eliminating the duplicate
@@ -250,30 +248,30 @@ public class Ex06_20220808005 {
         // Your code goes here...
        
         int[] newArray = new int[array.length];
-        int uniqueCount = 0;
+        int newArrayCounter = 0;
 
         for (int i = 0; i < array.length; i++) {
-            int currentValue = array[i];
+            int val = array[i];
             boolean isDuplicate = false;
 
-            // Daha önce görülüp görülmediğini kontrol et
-            for (int j = 0; j < uniqueCount; j++) {
-                if (newArray[j] == currentValue) {
+            // control if it is seen before
+            for (int j = 0; j < newArrayCounter; j++) {
+                if (newArray[j] == val) {
                     isDuplicate = true;
                     break;
                 }
             }
 
-            // Eğer daha önce görülmemişse, yeni dizide sakla
+            // if is not, keep it a new array
             if (!isDuplicate) {
-                newArray[uniqueCount] = currentValue;
-                uniqueCount++;
+                newArray[newArrayCounter] = val;
+                newArrayCounter++;
             }
         }
 
-        // Yeni diziyi oluşturup geri döndürme
-        int[] result = new int[uniqueCount];
-        for (int i = 0; i < uniqueCount; i++) {
+        // create new array and return
+        int[] result = new int[newArrayCounter];
+        for (int i = 0; i < newArrayCounter; i++) {
             result[i] = newArray[i];
         }
         return result;
@@ -320,7 +318,7 @@ public class Ex06_20220808005 {
 
     }
 
-    // Question 6: Locker puzzle
+    // Question 6: Locker puzzle *DONE
     public static int[] lockers(boolean[] locker) {
         /*
          * A school has 100 lockers and 100 students. All lockers are closed on
@@ -339,11 +337,27 @@ public class Ex06_20220808005 {
          * Returns: int[]: array of open locker indicies as counting numbers
          */
 
-        // Your code goes here...
-        int[] a ={2,4};
-        return a;
-    }
+         // Your code goes here...
 
+        
+
+         //Student 1 to 100, changing open to closed or closed to open.
+        for (int s = 1; s <= locker.length; s++) {
+             for (int i = s - 1; i < locker.length; i += s) {
+                   locker[i] = !locker[i];
+              }
+        }
+        // count the amount of open lockers
+        int open= 0; for (boolean isOpen : locker) {if (isOpen) {open++;}}
+
+        // save the index of open lockers to new array
+        int[] openLockers = new int[open]; int index = 0;
+        for (int i = 0; i < locker.length; i++) {
+             if (locker[i]) { openLockers[index] = i + 1;  index++;}
+        }
+
+        return openLockers;
+    }
 
     ////////////////////// HELPER FUNCTIONS //////////////////////
 
