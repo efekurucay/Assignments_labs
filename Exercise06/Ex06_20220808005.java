@@ -17,6 +17,7 @@ public class Ex06_20220808005 {
      * 
      * 
      * for your work for the questions
+     * yahya efe kurucay 20220808005 21.12.2023
      
      */
     public static void main(String[] args) {
