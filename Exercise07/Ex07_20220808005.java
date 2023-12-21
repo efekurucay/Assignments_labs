@@ -1,4 +1,4 @@
-public class Ex07_XXXXXXXXXXXX {
+public class Ex07_20220808005 {
     /*
      * Change the X's in the both file name and class' name to your own
      * student number and submit your file to the assignment given through
@@ -68,7 +68,7 @@ public class Ex07_XXXXXXXXXXXX {
          */
 
         // Your code goes here...
-
+return 5;
     }
 
     // Question 2: Compute the weekly hours for each employee <<<
@@ -91,6 +91,8 @@ public class Ex07_XXXXXXXXXXXX {
 
         // Your code goes here...
 
+        int[] array = {5,6,7,8};
+        return array;
     }
 
     // Question 3: multiply two matrices
@@ -110,7 +112,9 @@ public class Ex07_XXXXXXXXXXXX {
          */
 
         // Your code goes here...
-
+        
+        int [][]array = {{5,6,7,8},{5,6,7,8}};
+        return array;
     }
 
     // Question 4: All closest pairs of points <<<
@@ -130,6 +134,8 @@ public class Ex07_XXXXXXXXXXXX {
 
         // Your code goes here...
 
+        int []array = {5,6,7,8};
+        return array;
     }
 
     // Calculates the euclidean distance between two points in d dimensional space
@@ -146,7 +152,7 @@ public class Ex07_XXXXXXXXXXXX {
          */
 
         // Your code goes here...
-
+ return 5;
     }
 
     // Question 5: Nine heads and tails <<<
@@ -194,7 +200,8 @@ public class Ex07_XXXXXXXXXXXX {
          */
         
         // Your code goes here...
-
+           char[][] array = {{5,6,7,8},{5,6,7,8}};
+        return array;
     }
 
     // Converts the given decimal number to a binary represented with an array <<< # Sınav
@@ -205,7 +212,10 @@ public class Ex07_XXXXXXXXXXXX {
          * Args: number (int): the decimal number convert to binary
          * Returns: int[9]: the binary representation of the given number
          */
+    
 
+        int []array = {5,6,7,8};
+        return array;
     }
 
     /////////////// HELPER METHODS ////////////////////////////
