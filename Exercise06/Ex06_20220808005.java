@@ -20,22 +20,8 @@ public class Ex06_20220808005 {
      
      */
     public static void main(String[] args) {
-      // int []array = {5,6,7,9,9,42,6,7,3};
+       int []array = {5,6,7,9,9,42,6,7,3};
       
-    
-        int[] numbers = new int[10];
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = random(0, 10, 0, 1, 3, 5, 7, 9);
-        }
-        System.out.println("Generated numbers with duplicate values are: ");
-        display(numbers);
-        int[] nonDuplicateNumbers = eliminateDuplicates(numbers);
-        
-        System.out.println("Non duplicate numbers");
-        display(nonDuplicateNumbers);
-
-
-        
         // Question 1
         /*
         int[] students = new int[10];
@@ -293,7 +279,6 @@ public class Ex06_20220808005 {
         return result;
     }
     
-
     // Question 5: Sorted? *DONE
     public static boolean isSorted(int[] array) {
         /*
