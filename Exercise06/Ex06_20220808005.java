@@ -20,14 +20,19 @@ public class Ex06_20220808005 {
      
      */
     public static void main(String[] args) {
-       int []array = {5,6,7,9,9,42,6,7,3};
+      // int []array = {5,6,7,9,9,42,6,7,3};
       
-        // int []arry =eliminateDuplicates(array);
-        // for(int i=0; i< arry.length;i++){
-        //     System.out.println(arry[i]);
-        // }
-
-
+    
+        int[] numbers = new int[10];
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = random(0, 10, 0, 1, 3, 5, 7, 9);
+        }
+        System.out.println("Generated numbers with duplicate values are: ");
+        display(numbers);
+        int[] nonDuplicateNumbers = eliminateDuplicates(numbers);
+        
+        System.out.println("Non duplicate numbers");
+        display(nonDuplicateNumbers);
 
 
         
@@ -245,7 +250,7 @@ public class Ex06_20220808005 {
      
     }
 
-    // Question 4: Eliminate duplicates *NOT DONE YET
+    // Question 4: Eliminate duplicates *DONE ama chatgpt ile yaptım bakıcam daha.
     public static int[] eliminateDuplicates(int[] array) {
         /*
          * Write a method that returns a new array by eliminating the duplicate
@@ -259,29 +264,35 @@ public class Ex06_20220808005 {
         // Your code goes here...
        
         int[] newArray = new int[array.length];
-      
-        for ( int i = 0; i< array.length; i++){
+        int uniqueCount = 0;
 
-            for ( int j = i+1 ; j< array.length; j++){
-                //if index i equal index j 
-                if(array[i]==array[j]){ 
+        for (int i = 0; i < array.length; i++) {
+            int currentValue = array[i];
+            boolean isDuplicate = false;
 
-                    newArray[j]=array[j];
-
-
+            // Daha önce görülüp görülmediğini kontrol et
+            for (int j = 0; j < uniqueCount; j++) {
+                if (newArray[j] == currentValue) {
+                    isDuplicate = true;
+                    break;
                 }
+            }
 
+            // Eğer daha önce görülmemişse, yeni dizide sakla
+            if (!isDuplicate) {
+                newArray[uniqueCount] = currentValue;
+                uniqueCount++;
+            }
         }
 
-
-         
-
+        // Yeni diziyi oluşturup geri döndürme
+        int[] result = new int[uniqueCount];
+        for (int i = 0; i < uniqueCount; i++) {
+            result[i] = newArray[i];
         }
-
-       
-        
-        return newArray;
+        return result;
     }
+    
 
     // Question 5: Sorted? *DONE
     public static boolean isSorted(int[] array) {
