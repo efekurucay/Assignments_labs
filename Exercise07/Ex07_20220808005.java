@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class Ex07_20220808005 {
     /*
      * Change the X's in the both file name and class' name to your own
@@ -12,6 +13,7 @@ public class Ex07_20220808005 {
      * Main method is just there for you to test your program, you will not be evaluated by your main method
      * You can write any method you like, and use them in suitable places but you will only be graded
      * for your work for the questions
+     * yahya efe kurucay 20220808005 21.12.2023
      */
     public static void main(String[] args) {
         /* Question 1
@@ -51,10 +53,16 @@ public class Ex07_20220808005 {
         char[][] charArray2D = headsNtails(7);
         display2D(charArray2D);
         */
+        
+        int[][] employees = {{4,5,6,7,6,2,5},{2,3,8,12,4,3,7},{16,20,11,10,0,1,2},{4,0,7,3,3,4,5}};
 
+        display2D(employees);
+        int[] workingHours = employeeWorkingHours(employees);
+        display2D(employees);
+        display(workingHours);
     }
 
-    // Question 1: Sum the major diagonal in a matrix
+    // Question 1: Sum the major diagonal in a matrix *DONE 
     public static int sumDiagonal(int[][] array2D) {
         /*
          * Write a method that sums all the numbers in the major diagonal
@@ -68,10 +76,22 @@ public class Ex07_20220808005 {
          */
 
         // Your code goes here...
-return 5;
+
+
+        //n is the first kutucuk
+        int n = array2D.length;
+        // create a variable to keep sum
+        int diagonalSum = 0;
+        // for loop to sum
+        for (int i = 0; i < n; i++) {
+            diagonalSum += array2D[i][i];
+        }
+        // return sum
+        return diagonalSum;
+
     }
 
-    // Question 2: Compute the weekly hours for each employee <<<
+    // Question 2: Compute the weekly hours for each employee <<< *DONE with CHATGPT 
     public static int[] employeeWorkingHours(int[][] employees) {
         /*
          * Suppose the weekly hours for all employees are stored in a
@@ -91,8 +111,35 @@ return 5;
 
         // Your code goes here...
 
-        int[] array = {5,6,7,8};
-        return array;
+
+       // create an array to store total hours.
+       int[] totalHours = new int[employees.length];
+
+       for (int i = 0; i < employees.length; i++) {
+           for (int j = 0; j < employees[i].length; j++) {
+               // total hours each employee
+               totalHours[i] += employees[i][j];
+           }
+       }
+
+       // Çalışanları toplam çalışma saatlerine göre azalan sırayla sırala
+       for (int i = 0; i < totalHours.length - 1; i++) {
+           for (int j = 0; j < totalHours.length - 1 - i; j++) {
+               if (totalHours[j] < totalHours[j + 1]) {
+                   // Toplam saatlere göre sıralama
+                   int tempTotalHours = totalHours[j];
+                   totalHours[j] = totalHours[j + 1];
+                   totalHours[j + 1] = tempTotalHours;
+
+                   // Çalışanları toplam saatlere göre sıralama
+                   int[] tempEmployee = employees[j];
+                   employees[j] = employees[j + 1];
+                   employees[j + 1] = tempEmployee;
+               }
+           }
+       }
+
+       return totalHours;
     }
 
     // Question 3: multiply two matrices
