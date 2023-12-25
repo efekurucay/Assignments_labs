@@ -12,9 +12,14 @@ public class Ex07_20220808005 {
      * Main method is just there for you to test your program, you will not be evaluated by your main method
      * You can write any method you like, and use them in suitable places but you will only be graded
      * for your work for the questions
+     *-----------------------------------------------------
+     * Akdeniz University CSE101L Lab Assignments
+     * Name: Yahya Efe Kurucay
+     * Date: 25.12.2023
+     * Description: Exercise07
+     * Website: https://efekurucay.com
+     *-----------------------------------------------------
      * 
-     * yahya efe kurucay 20220808005 25.12.2023
-     * efekurucaycom
      */
     public static void main(String[] args) {
         /* Question 1
