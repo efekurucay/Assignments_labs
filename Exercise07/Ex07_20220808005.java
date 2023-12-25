@@ -53,13 +53,14 @@ public class Ex07_20220808005 {
         char[][] charArray2D = headsNtails(7);
         display2D(charArray2D);
         */
-        
-        int[][] employees = {{4,5,6,7,6,2,5},{2,3,8,12,4,3,7},{16,20,11,10,0,1,2},{4,0,7,3,3,4,5}};
+        int[][] matrixA = generateArray2D(3, 2, 1, 10);
+        int[][] matrixB = generateArray2D(2, 3, 1, 10);
+        display2D(matrixA);
+        display2D(matrixB);
 
-        display2D(employees);
-        int[] workingHours = employeeWorkingHours(employees);
-        display2D(employees);
-        display(workingHours);
+        int[][] productMatrix = matmul(matrixA, matrixB);
+        display2D(productMatrix);
+       
     }
 
     // Question 1: Sum the major diagonal in a matrix *DONE 
@@ -160,8 +161,18 @@ public class Ex07_20220808005 {
 
         // Your code goes here...
         
-        int [][]array = {{5,6,7,8},{5,6,7,8}};
-        return array;
+        int[][] sum = new int[matrixA.length][matrixB[0].length];
+        if (matrixA[0].length != matrixB.length)
+            return sum;//this expression will return an empty array if the column of the matrix is not equal to the row of the matrix
+        for (int i = 0; i < matrixA.length; i++) {
+            for (int j = 0; j < matrixB[0].length; j++) {
+                for (int k = 0; k < matrixA[0].length; k++) {
+                    sum[i][j] += matrixA[i][k] * matrixB[k][j];
+                }
+            }
+        }
+
+        return sum;
     }
 
     // Question 4: All closest pairs of points <<<
@@ -179,10 +190,38 @@ public class Ex07_20220808005 {
          *      (int[m]) : array of point indices that share the same minimum distance to given point
          */
 
-        // Your code goes here...
+        // Your code goes here... KODLAR INTE CEVIRILICEK
 
-        int []array = {5,6,7,8};
-        return array;
+        double[] array = new double[points.length];
+        double min = 99999;
+        int count = 0;
+        int[] array2 = new int[points.length];
+        for(int i = 0; i < points.length; i++){
+            array[i] = distance(points[i], points[pointIndex]);
+            if(i != pointIndex){
+                if(array[i] <= min){
+                    min = array[i];
+                }
+            }
+        }
+        for(int j = 0; j < array.length; j++){
+               if(pointIndex!= j){
+                 if(array[j] == min) {
+                    array2[count] = j;
+                    count++;
+                }
+            }
+        }
+        int n = 0;
+        int[] array3 = new int[count];
+        for (int k = 0; k < array3.length; k++) {
+            array3[n] = array2[k];
+            if (array2[k] != 0) {
+                n++;
+            }
+        }
+
+        return array3;
     }
 
     // Calculates the euclidean distance between two points in d dimensional space
@@ -198,8 +237,15 @@ public class Ex07_20220808005 {
          *      (double): distance between given two points UP TO 1 DECIMAL PLACE (see round method bellow)
          */
 
-        // Your code goes here...
- return 5;
+        // Your code goes here... DİĞER KODLAR DOUBLE INTE CEVIR
+        double a = 0;
+        double[] array = new double[pointA.length];
+        for (int i = 0; i < pointB.length; i++){
+            array[i] = Math.pow(pointA[i] - pointB[i],2);
+            a += array[i];
+        }
+
+        return Math.sqrt(a);
     }
 
     // Question 5: Nine heads and tails <<<
@@ -247,8 +293,20 @@ public class Ex07_20220808005 {
          */
         
         // Your code goes here...
-           char[][] array = {{5,6,7,8},{5,6,7,8}};
-        return array;
+        char[][] b = new char[3][3];
+        int[] c = decimalToBinary(number);
+        int y = 0;
+        for(int i = 0; i < b.length; i++){
+            for(int j = 0; j < b.length; j++){
+                b[i][j] = 'H';
+                if(c[y] != 0){
+                    b[i][j] = 'T';
+                }
+                y++;
+            }
+
+        }
+        return b;
     }
 
     // Converts the given decimal number to a binary represented with an array <<< # Sınav
@@ -261,8 +319,18 @@ public class Ex07_20220808005 {
          */
     
 
-        int []array = {5,6,7,8};
-        return array;
+         int[] b = new int[9];
+        int[] a = {256, 128, 64, 32, 16, 8, 4, 2, 1};
+        for (int i = 0; i < a.length; i++) {
+
+            if (number % a[i] != number) {
+                number =  number % a[i];
+                b[i] = 1;
+
+            }
+        }
+
+        return b;
     }
 
     /////////////// HELPER METHODS ////////////////////////////
@@ -293,7 +361,6 @@ public class Ex07_20220808005 {
         }
         System.out.println("--------------------------");
     }
-
 
     public static void display2D(char[][] array2D) {
         for (char[] row : array2D) {
