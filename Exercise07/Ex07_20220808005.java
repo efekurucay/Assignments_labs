@@ -1,4 +1,3 @@
-import java.util.Arrays;
 public class Ex07_20220808005 {
     /*
      * Change the X's in the both file name and class' name to your own
@@ -13,7 +12,9 @@ public class Ex07_20220808005 {
      * Main method is just there for you to test your program, you will not be evaluated by your main method
      * You can write any method you like, and use them in suitable places but you will only be graded
      * for your work for the questions
-     * yahya efe kurucay 20220808005 21.12.2023
+     * 
+     * yahya efe kurucay 20220808005 25.12.2023
+     * efekurucaycom
      */
     public static void main(String[] args) {
         /* Question 1
@@ -53,16 +54,8 @@ public class Ex07_20220808005 {
         char[][] charArray2D = headsNtails(7);
         display2D(charArray2D);
         */
-        int[][] matrixA = generateArray2D(3, 2, 1, 10);
-        int[][] matrixB = generateArray2D(2, 3, 1, 10);
-        display2D(matrixA);
-        display2D(matrixB);
-
-        int[][] productMatrix = matmul(matrixA, matrixB);
-        display2D(productMatrix);
-       
+   
     }
-
     // Question 1: Sum the major diagonal in a matrix *DONE 
     public static int sumDiagonal(int[][] array2D) {
         /*
@@ -92,7 +85,7 @@ public class Ex07_20220808005 {
 
     }
 
-    // Question 2: Compute the weekly hours for each employee <<< *DONE with CHATGPT 
+    // Question 2: Compute the weekly hours for each employee <<< *DONE
     public static int[] employeeWorkingHours(int[][] employees) {
         /*
          * Suppose the weekly hours for all employees are stored in a
@@ -114,36 +107,29 @@ public class Ex07_20220808005 {
 
 
        // create an array to store total hours.
-       int[] totalHours = new int[employees.length];
-
+       int[] a = new int[employees.length];
+       int[] sum = new int[employees.length];
        for (int i = 0; i < employees.length; i++) {
            for (int j = 0; j < employees[i].length; j++) {
-               // total hours each employee
-               totalHours[i] += employees[i][j];
+               sum[i] += employees[i][j];
            }
        }
 
-       // Çalışanları toplam çalışma saatlerine göre azalan sırayla sırala
-       for (int i = 0; i < totalHours.length - 1; i++) {
-           for (int j = 0; j < totalHours.length - 1 - i; j++) {
-               if (totalHours[j] < totalHours[j + 1]) {
-                   // Toplam saatlere göre sıralama
-                   int tempTotalHours = totalHours[j];
-                   totalHours[j] = totalHours[j + 1];
-                   totalHours[j + 1] = tempTotalHours;
+       for (int k = 0; k < sum.length; k++) {
+           for (int b = 0; b < sum.length; b++) {
+               if (sum[k] > sum[b]) {
+                   int temp = sum[k];
+                   sum[k] = sum[b];
+                   sum[b] = temp;
 
-                   // Çalışanları toplam saatlere göre sıralama
-                   int[] tempEmployee = employees[j];
-                   employees[j] = employees[j + 1];
-                   employees[j + 1] = tempEmployee;
                }
            }
        }
 
-       return totalHours;
+       return sum;
     }
 
-    // Question 3: multiply two matrices
+    // Question 3: multiply two matrices *DONE
     public static int[][] matmul(int[][] matrixA, int[][] matrixB) {
         /*# see: https://www.khanacademy.org/math/multivariable-calculus/thinking-about-multivariable-function/x786f2022:vectors-and-matrices/a/matrices--intro-mvc
         * https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:matrices/x9e81a4f98389efdf:multiplying-matrices-by-matrices/v/matrix-multiplication-intro
@@ -175,7 +161,7 @@ public class Ex07_20220808005 {
         return sum;
     }
 
-    // Question 4: All closest pairs of points <<<
+    // Question 4: All closest pairs of points <<< * DONE
     public static int[] getClosestPoints(int[][] points, int pointIndex) {
         /*
          * Write a method that returns the array indices of the closest points to the given
@@ -192,39 +178,32 @@ public class Ex07_20220808005 {
 
         // Your code goes here... KODLAR INTE CEVIRILICEK
 
-        double[] array = new double[points.length];
-        double min = 99999;
-        int count = 0;
-        int[] array2 = new int[points.length];
-        for(int i = 0; i < points.length; i++){
-            array[i] = distance(points[i], points[pointIndex]);
-            if(i != pointIndex){
-                if(array[i] <= min){
-                    min = array[i];
+        double closest = Double.MAX_VALUE;
+            int remind = 0;
+            for(int i = 0;i<points.length;i++){
+                if(distance(points[i],points[pointIndex]) < closest && i !=pointIndex){
+                    closest = distance(points[i], points[pointIndex]);
+                    remind = i;
                 }
             }
-        }
-        for(int j = 0; j < array.length; j++){
-               if(pointIndex!= j){
-                 if(array[j] == min) {
-                    array2[count] = j;
-                    count++;
+            int counter = 0;
+            for(int i = 0;i<points.length;i++){
+                if(distance(points[i], points[pointIndex]) == closest){
+                    counter++;
                 }
             }
-        }
-        int n = 0;
-        int[] array3 = new int[count];
-        for (int k = 0; k < array3.length; k++) {
-            array3[n] = array2[k];
-            if (array2[k] != 0) {
-                n++;
+            int[] sameDistance = new int[counter];
+            int n = 0;
+            for(int i = 0 ;i<points.length;i++){
+                if(distance(points[i], points[pointIndex]) == closest){
+                    sameDistance[n] = i;
+                    n++;
+                }
             }
-        }
-
-        return array3;
+            return sameDistance;
     }
 
-    // Calculates the euclidean distance between two points in d dimensional space
+    // Calculates the euclidean distance between two points in d dimensional space* DONE
     public static double distance(int[] pointA, int[] pointB) {
         /*
          * Helper method for calculating distance between given two points
@@ -238,17 +217,16 @@ public class Ex07_20220808005 {
          */
 
         // Your code goes here... DİĞER KODLAR DOUBLE INTE CEVIR
-        double a = 0;
-        double[] array = new double[pointA.length];
-        for (int i = 0; i < pointB.length; i++){
-            array[i] = Math.pow(pointA[i] - pointB[i],2);
-            a += array[i];
+        double sum = 0;
+        for(int i = 0;i<pointA.length;i++){
+            sum =Math.pow((pointA[i]-pointB[i]), 2); 
         }
-
-        return Math.sqrt(a);
+    
+        double distance = Math.sqrt(sum);
+        return distance;
     }
 
-    // Question 5: Nine heads and tails <<<
+    // Question 5: Nine heads and tails <<< *DONE
     public static char[][] headsNtails(int number) {
         /*
          * Nine coins are placed in a 3-by-3 matrix with some face up and
@@ -293,23 +271,23 @@ public class Ex07_20220808005 {
          */
         
         // Your code goes here...
-        char[][] b = new char[3][3];
-        int[] c = decimalToBinary(number);
-        int y = 0;
-        for(int i = 0; i < b.length; i++){
-            for(int j = 0; j < b.length; j++){
-                b[i][j] = 'H';
-                if(c[y] != 0){
-                    b[i][j] = 'T';
-                }
-                y++;
-            }
+        int[] binary = decimalToBinary(number);       
+        char[][] coinMatrix = new char[3][3];
 
+        for (int i = 0; i < 9; i++) {
+            int row = i / 3;
+            int col = i % 3;
+            if (binary[i] == 0) {
+                coinMatrix[row][col] = 'H';
+            }
+            else {
+                coinMatrix[row][col] = 'T';
+            }
         }
-        return b;
+        return coinMatrix;
     }
 
-    // Converts the given decimal number to a binary represented with an array <<< # Sınav
+    // Converts the given decimal number to a binary represented with an array <<< # Sınav *DONE
     public static int[] decimalToBinary(int number) {
         /*
          * Helper method to conver the given decimal number to binary representation
@@ -319,18 +297,14 @@ public class Ex07_20220808005 {
          */
     
 
-         int[] b = new int[9];
-        int[] a = {256, 128, 64, 32, 16, 8, 4, 2, 1};
-        for (int i = 0; i < a.length; i++) {
-
-            if (number % a[i] != number) {
-                number =  number % a[i];
-                b[i] = 1;
-
-            }
-        }
-
-        return b;
+         int[] binary = new int[9]; 
+         int i = binary.length - 1;
+         while (number > 0) {
+             binary[i] = number % 2;
+             number /= 2;
+             i--;
+         }
+         return binary;
     }
 
     /////////////// HELPER METHODS ////////////////////////////
