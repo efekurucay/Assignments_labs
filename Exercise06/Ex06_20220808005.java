@@ -1,4 +1,13 @@
-
+/*
+*-----------------------------------------------------
+* Akdeniz University CSE101L Lab Assignments
+* Name: Yahya Efe Kurucay
+* Date: 26.12.2023
+* Description: Exercise06
+* Score: 93
+* Website: https://efekurucay.com
+*-----------------------------------------------------
+ */
 public class Ex06_20220808005 {
 
     /*

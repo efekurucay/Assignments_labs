@@ -1,3 +1,13 @@
+/*
+*-----------------------------------------------------
+* Akdeniz University CSE101L Lab Assignments
+* Name: Yahya Efe Kurucay
+* Date: 13.11.2023
+* Description: Exercise01
+* Score: 100
+* Website: https://efekurucay.com
+*-----------------------------------------------------
+ */
 public class Ex01_20220808005 {
     public static void main(String[] args) {
 

@@ -1,5 +1,14 @@
 import java.util.Scanner;
-
+/*
+*-----------------------------------------------------
+* Akdeniz University CSE101L Lab Assignments
+* Name: Yahya Efe Kurucay
+* Date: 26.12.2023
+* Description: Exercise05
+* Score: 82
+* Website: https://efekurucay.com
+*-----------------------------------------------------
+ */
 public class Ex05_20220808005 {
 
     public static double computePI(int pi){

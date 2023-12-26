@@ -1,5 +1,15 @@
 import java.util.Random;
 import java.util.Scanner;
+/*
+*-----------------------------------------------------
+* Akdeniz University CSE101L Lab Assignments
+* Name: Yahya Efe Kurucay
+* Date: 14.11.2023
+* Description: Exercise03
+* Score: 46 (due to Ş I guess)
+* Website: https://efekurucay.com
+*-----------------------------------------------------
+ */
 public class Ex0320220808005{
 
 public static void main(String[] args) {
