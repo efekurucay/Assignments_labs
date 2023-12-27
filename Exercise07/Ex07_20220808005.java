@@ -17,6 +17,7 @@ public class Ex07_20220808005 {
      * Name: Yahya Efe Kurucay
      * Date: 25.12.2023
      * Description: Exercise07
+     * Score: 80
      * Website: https://efekurucay.com
      *-----------------------------------------------------
      * 
