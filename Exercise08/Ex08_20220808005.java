@@ -1,3 +1,17 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+
 public class Ex08_20220808005{
     /*
      * Change the X's in the both file name and class' name to your own
@@ -16,16 +30,34 @@ public class Ex08_20220808005{
      *-----------------------------------------------------
      * Akdeniz University CSE101L Lab Assignments
      * Name: Yahya Efe Kurucay
-     * Date: 26.12.2023
+     * Date: 01.01.2024 
      * Description: Exercise08
      * Website: https://efekurucay.com
      *-----------------------------------------------------
      */
-    public static void main(String[] args) {
+     public static void main(String[] args) {
+        // Test the intLogger method
+        intLogger("IntegerLog.txt");
 
+        // Test the intReader method
+        int[] intArray = intReader("IntegerLog.txt");
+        System.out.println("Logged Integers: " + Arrays.toString(intArray));
+
+        // Test the replaceNumbers method
+        replaceNumbers("IntegerLog.txt", 5, 10);
+
+        // Test the readSortPokeStats method
+        readSortPokeStats("PokeStats.txt", "SortedPokeStats.txt");
+
+        // Test the readFilterPokeType method
+        String[] flyingPokemon = readFilterPokeType("PokeStats.txt", "Flying");
+        System.out.println("Pokémon with Flying type: " + Arrays.toString(flyingPokemon));
+
+        // Test the readFilterPokeStats method
+        readFilterPokeStats("PokeStats.txt");
     }
 
-    // Question 1: Log unspecified number of integers
+    // Question 1: Log unspecified number of integers * chatgpt
     public static void intLogger(String filename) {
         /*
          * Write a method that logs all integers entered to the console.
@@ -43,6 +75,39 @@ public class Ex08_20220808005{
          */
 
          // Your code goes here...
+         try (Scanner scanner = new Scanner(System.in);
+         PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+
+        while (true) {
+            try {
+                System.out.print("Enter an integer (or 0 to exit): ");
+                int input = scanner.nextInt();
+
+                // Log the input to the console
+                System.out.println(input);
+
+                // If input is 0, exit the loop
+                if (input == 0) {
+                    break;
+                }
+
+                // Log the input to the file
+                writer.println(input);
+
+            } catch (InputMismatchException e) {
+                // Log non-integer input to the console
+                System.out.println("non-integer-input");
+
+                // Log non-integer input to the file
+                writer.println("non-integer-input");
+                scanner.next(); // Consume the invalid input to prevent an infinite loop
+            }
+        }
+
+    } catch (IOException e) {
+        // Log the exception message to the console
+        System.out.println("Exception: " + e.getMessage());
+    }
     }
 
     // Question 2: Read Integers from the Log File.
@@ -62,8 +127,33 @@ public class Ex08_20220808005{
          */
 
          // Your code goes here...
-         int[]a={};
-         return a;
+         int[] integers = new int[0];
+        int index = 0;
+
+        try (Scanner fileScanner = new Scanner(new File(filename))) {
+            while (fileScanner.hasNext()) {
+                try {
+                    int value = fileScanner.nextInt();
+
+                    // Resize the array and add the new value
+                    int[] tempArray = new int[index + 1];
+                    System.arraycopy(integers, 0, tempArray, 0, index);
+                    tempArray[index] = value;
+                    integers = tempArray;
+                    index++;
+                } catch (Exception e) {
+                    // Log non-integer input to the console
+                    System.out.println("non-integer-input");
+                    // Consume the invalid input to prevent an infinite loop
+                    fileScanner.next();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            // Log file not found exception to the console
+            System.out.println("File not found: " + filename);
+        }
+
+        return integers;
     }
 
     // Question 3: Replace Specific Numbers in the Log File
@@ -84,8 +174,43 @@ public class Ex08_20220808005{
          */
 
          // Your code goes here...
+
+         try (Scanner fileScanner = new Scanner(new File(filename));
+         PrintWriter writer = new PrintWriter(new FileWriter("temp.txt"))) {
+
+        while (fileScanner.hasNext()) {
+            try {
+                int value = fileScanner.nextInt();
+
+                // Replace oldNum with newNum
+                if (value == oldNum) {
+                    writer.print(newNum + " ");
+                } else {
+                    writer.print(value + " ");
+                }
+            } catch (Exception e) {
+                // Log non-integer input to the console
+                System.out.println("non-integer-input");
+                // Consume the invalid input to prevent an infinite loop
+                fileScanner.next();
+            }
+        }
+
+    } catch (IOException e) {
+        // Log file not found exception to the console
+        System.out.println("Exception: " + e.getMessage());
     }
 
+    // Rename temp file to the original file
+    File originalFile = new File(filename);
+    File tempFile = new File("temp.txt");
+
+    if (tempFile.renameTo(originalFile)) {
+        System.out.println("Numbers replaced successfully.");
+    } else {
+        System.out.println("Error replacing numbers.");
+    }
+    }
     /*
      * Example Pokémon Data:
 Name Type1 Type2 HP Attack Defense Sp.Atk Sp.Def Speed
@@ -126,6 +251,69 @@ Pidgey Flying Normal 40 45 40 35 35 56
          */
 
          // Your code goes here...
+        try (Scanner fileScanner = new Scanner(new File(datafile));
+             PrintWriter writer = new PrintWriter(new FileWriter(sortedfile))) {
+
+            // Read the header line (discard it for now)
+            fileScanner.nextLine();
+
+            // Read and store Pokemon data in an array
+            String[] pokemonData = new String[0];
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                pokemonData = addElementToArray(pokemonData, line);
+            }
+
+            // Sort Pokemon data by total base stats in descending order
+            sortPokemonData(pokemonData);
+
+            // Write sorted data to the new file
+            writer.println("Name Type1 Type2 HP Attack Defense Sp.Atk Sp.Def Speed");
+            for (String line : pokemonData) {
+                writer.println(line);
+            }
+
+            System.out.println("Pokémon data sorted and written to " + sortedfile);
+        } catch (FileNotFoundException e) {
+            System.out.println("Exception: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+
+    private static String[] addElementToArray(String[] array, String element) {
+        String[] newArray = new String[array.length + 1];
+        System.arraycopy(array, 0, newArray, 0, array.length);
+        newArray[array.length] = element;
+        return newArray;
+    }
+
+    private static void sortPokemonData(String[] pokemonData) {
+        for (int i = 0; i < pokemonData.length - 1; i++) {
+            for (int j = i + 1; j < pokemonData.length; j++) {
+                if (compareTotalBaseStats(pokemonData[j], pokemonData[i]) > 0) {
+                    // Swap lines if jth Pokemon has higher total base stats than ith Pokemon
+                    String temp = pokemonData[i];
+                    pokemonData[i] = pokemonData[j];
+                    pokemonData[j] = temp;
+                }
+            }
+        }
+    }
+
+    private static int compareTotalBaseStats(String line1, String line2) {
+        int totalStats1 = extractTotalBaseStats(line1);
+        int totalStats2 = extractTotalBaseStats(line2);
+        return Integer.compare(totalStats2, totalStats1);
+    }
+
+    private static int extractTotalBaseStats(String line) {
+        String[] data = line.split(" ");
+        int total = 0;
+        for (int i = 3; i < data.length; i++) {
+            total += Integer.parseInt(data[i]);
+        }
+        return total;
     }
 
     // Question 5: Read and Filter Pokémon Stats Data by Type
@@ -150,8 +338,25 @@ Pidgey Flying Normal 40 45 40 35 35 56
          */
 
          // Your code goes here...
-          String[]a={};
-         return a;
+         String[] filteredPokemonNames = new String[0];
+
+         try (Scanner fileScanner = new Scanner(new File(filename))) {
+             // Read the header line (discard it for now)
+             fileScanner.nextLine();
+ 
+             while (fileScanner.hasNextLine()) {
+                 String line = fileScanner.nextLine();
+                 if (line.contains(poketype)) {
+                     String[] data = line.split(" ");
+                     String pokemonName = data[0];
+                     filteredPokemonNames = addElementToArray(filteredPokemonNames, pokemonName);
+                 }
+             }
+         } catch (FileNotFoundException e) {
+             System.out.println("Exception: " + e.getMessage());
+         }
+ 
+         return filteredPokemonNames;
     }
 
     // Question 6: Read and Filter Pokémon Stats Data by Highest Speed Stat
@@ -169,6 +374,43 @@ Pidgey Flying Normal 40 45 40 35 35 56
          */
 
          // Your code goes here...
+         try {
+            // Dosyayı okuma
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+
+            // Başlık satırını okuma
+            String header = reader.readLine();
+
+            // Pokemon verilerini depolamak için liste oluşturma
+            List<String[]> pokemonData = new ArrayList<>();
+
+            // Dosyadaki her satırı okuma ve listeye ekleme
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(" ");
+                pokemonData.add(data);
+            }
+
+            // Hız istatistiğine göre sıralama
+            pokemonData.sort(Comparator.comparingInt(data -> Integer.parseInt(data[6])));
+
+            // En yüksek 5 Hız istatistiğine sahip Pokemon'ları yazdırma
+            System.out.println(header);
+            for (int i = Math.max(0, pokemonData.size() - 5); i < pokemonData.size(); i++) {
+                String[] data = pokemonData.get(i);
+                System.out.println(String.join(" ", data));
+            }
+
+            // Dosyayı kapatma
+            reader.close();
+        } catch (IOException e) {
+            // İstisna durumu: Dosya okuma hatası
+            System.out.println("Dosya okuma hatasi: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            // İstisna durumu: Hız istatistiği sayıya dönüştürülemez
+            System.out.println("Hata: Hiz istatistiği sayiya dönüştürülemedi.");
+        }
+         
     }
 
     /////////////// HELPER METHODS ////////////////////////////
