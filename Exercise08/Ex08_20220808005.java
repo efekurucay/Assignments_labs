@@ -33,6 +33,8 @@ public class Ex08_20220808005{
      * Date: 01.01.2024 
      * Description: Exercise08
      * Website: https://efekurucay.com
+     * !!!!!!!!! FULL CHATGPT.!!!! I DID NOT REVIEW I DON NOT KNOW IF IT IS WORKING OR NOT
+     * !!!!!!!!! LOOK AT THE OTHER FILE THAT FINISH WITH 037. THANKS TO BURAK 
      *-----------------------------------------------------
      */
      public static void main(String[] args) {
